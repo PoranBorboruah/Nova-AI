@@ -1,0 +1,1701 @@
+/* =========================================================
+   NOVA AI - MAIN STYLES
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-main: #0d0f12;
+    --bg-sidebar: #15171b;
+    --bg-sidebar-hover: #202329;
+    --bg-sidebar-active: #272a31;
+
+    --border: #292c33;
+    --border-light: #22252b;
+
+    --text: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+
+    --accent: #ffffff;
+    --user-message: #292c33;
+
+    --input-bg: #1b1e23;
+}
+
+html,
+body {
+    font-family: "Times New Roman", Times, serif;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    background: var(--bg-main);
+    color: var(--text);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   MAIN APP
+   ========================================================= */
+
+.app {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+
+    background: var(--bg-main);
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    width: 290px;
+    height: 100vh;
+
+    background: var(--bg-sidebar);
+
+    border-right: 1px solid var(--border);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 18px 14px;
+
+    flex-shrink: 0;
+}
+
+.sidebar-top {
+    width: 100%;
+}
+
+
+/* ---------- Brand ---------- */
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 6px 8px 22px;
+}
+
+.brand-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: #292d35;
+
+    color: white;
+
+    font-size: 21px;
+}
+
+.brand h2 {
+    font-size: 16px;
+    font-weight: 600;
+
+    line-height: 1.2;
+}
+
+.brand span {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 13px;
+
+    color: var(--text-muted);
+}
+
+
+/* ---------- New Chat ---------- */
+
+.new-chat {
+    width: 100%;
+    height: 48px;
+
+    border: 1px solid #30333a;
+
+    border-radius: 10px;
+
+    background: #202329;
+
+    color: var(--text);
+
+    font-size: 14px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 15px;
+
+    cursor: pointer;
+
+    transition: 0.15s ease;
+}
+
+.new-chat span {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.new-chat:hover {
+    background: #292c32;
+    border-color: #3a3d45;
+}
+
+
+/* =========================================================
+   RECENT CHATS
+   ========================================================= */
+
+.sidebar-section {
+    margin-top: 30px;
+}
+
+.section-title {
+    padding: 0 10px;
+
+    margin-bottom: 10px;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.06em;
+
+    color: #777b85;
+}
+
+.chat-history {
+    width: 100%;
+
+    height: 42px;
+
+    padding: 0 11px;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #a8abb3;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    transition: 0.15s ease;
+}
+
+.chat-history span {
+    font-size: 13px;
+
+    color: #777b85;
+
+    flex-shrink: 0;
+}
+
+.chat-history:hover {
+    background: var(--bg-sidebar-hover);
+
+    color: #eeeeef;
+}
+
+.chat-history.active {
+    background: var(--bg-sidebar-active);
+
+    color: #eeeeef;
+}
+
+
+/* =========================================================
+   SIDEBAR BOTTOM
+   ========================================================= */
+
+.sidebar-bottom {
+    width: 100%;
+}
+
+.sidebar-item {
+    width: 100%;
+
+    height: 42px;
+
+    padding: 0 10px;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: #a8abb3;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.15s ease;
+}
+
+.sidebar-item span {
+    width: 18px;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+.sidebar-item:hover {
+    background: var(--bg-sidebar-hover);
+
+    color: white;
+}
+
+
+/* ---------- User Profile ---------- */
+
+.user-profile {
+    margin-top: 10px;
+
+    padding: 14px 10px 2px;
+
+    border-top: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: #30343c;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+
+    flex-shrink: 0;
+}
+
+.user-info {
+    min-width: 0;
+
+    flex: 1;
+}
+
+.user-info strong {
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.user-info span {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 12px;
+
+    color: var(--text-muted);
+}
+
+.profile-more {
+    color: #777b85;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MAIN CHAT AREA
+   ========================================================= */
+
+.main {
+    height: 100vh;
+
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: var(--bg-main);
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.topbar {
+    height: 68px;
+
+    padding: 0 22px;
+
+    border-bottom: 1px solid var(--border-light);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-shrink: 0;
+}
+
+.model-selector {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    cursor: pointer;
+}
+
+.model-icon {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 10px;
+
+    background: #292d35;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+.model-info strong {
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.model-info span {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 11px;
+
+    color: var(--text-muted);
+}
+
+.dropdown {
+    margin-left: 2px;
+
+    color: #858993;
+
+    font-size: 12px;
+}
+
+
+/* ---------- Top Actions ---------- */
+
+.top-actions {
+    display: flex;
+
+    gap: 4px;
+}
+
+.top-actions button {
+    width: 36px;
+    height: 36px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #92959e;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.15s ease;
+}
+
+.top-actions button:hover {
+    background: #202329;
+
+    color: white;
+}
+
+
+/* =========================================================
+   CHAT WINDOW
+   ========================================================= */
+
+.chat-window {
+    flex: 1;
+
+    width: 100%;
+
+    overflow-y: auto;
+
+    padding: 35px 25px 150px;
+}
+
+
+/* Scrollbar */
+
+.chat-window::-webkit-scrollbar {
+    width: 7px;
+}
+
+.chat-window::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-window::-webkit-scrollbar-thumb {
+    background: #30333a;
+
+    border-radius: 10px;
+}
+
+.chat-window::-webkit-scrollbar-thumb:hover {
+    background: #41444d;
+}
+
+
+/* =========================================================
+   WELCOME SCREEN
+   ========================================================= */
+
+.welcome {
+    max-width: 850px;
+
+    margin: 80px auto 50px;
+
+    text-align: center;
+}
+
+.welcome-icon {
+    width: 52px;
+    height: 52px;
+
+    margin: 0 auto 24px;
+
+    border-radius: 15px;
+
+    background: #272a31;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+
+    color: white;
+}
+
+.welcome h1 {
+    font-size: 30px;
+
+    font-weight: 600;
+
+    letter-spacing: -0.5px;
+
+    margin-bottom: 12px;
+}
+
+.welcome p {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   SUGGESTION BUTTONS
+   ========================================================= */
+
+.suggestions {
+    max-width: 650px;
+
+    margin: 30px auto 0;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.suggestions button {
+    height: 48px;
+
+    padding: 0 16px;
+
+    border: 1px solid #2b2e35;
+
+    border-radius: 10px;
+
+    background: #17191d;
+
+    color: #c7c9ce;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 14px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.15s ease;
+}
+
+.suggestions button span {
+    color: #9da1aa;
+
+    font-size: 14px;
+}
+
+.suggestions button:hover {
+    background: #202329;
+
+    border-color: #3a3d45;
+
+    color: white;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MESSAGES
+   ========================================================= */
+
+.message {
+    max-width: 850px;
+
+    margin: 25px auto;
+
+    display: flex;
+
+    gap: 14px;
+
+    line-height: 1.65;
+
+    font-size: 14px;
+}
+
+
+/* ---------- Bot Message ---------- */
+
+.message.bot {
+    align-self: auto;
+
+    justify-content: flex-start;
+
+    background: transparent;
+
+    padding: 0;
+
+    border-radius: 0;
+
+    max-width: 850px;
+}
+
+.message-avatar {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 9px;
+
+    background: #292d35;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    font-size: 16px;
+}
+
+.message-content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.message-name {
+    margin-bottom: 5px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #d7d8dc;
+}
+
+.message-text {
+    color: #e2e3e6;
+
+    white-space: pre-wrap;
+
+    word-wrap: break-word;
+}
+
+
+/* ---------- User Message ---------- */
+
+.message.user {
+    justify-content: flex-end;
+
+    max-width: 850px;
+}
+
+.message.user .message-content {
+    flex: initial;
+
+    max-width: 70%;
+}
+
+.message.user .message-text {
+    padding: 11px 16px;
+
+    border-radius: 15px;
+
+    background: var(--user-message);
+
+    color: #f0f0f2;
+
+    white-space: pre-wrap;
+
+    word-wrap: break-word;
+}
+
+.message.user .message-name,
+.message.user .message-avatar {
+    display: none;
+}
+
+
+/* =========================================================
+   COMPOSER AREA
+   ========================================================= */
+
+.composer-area {
+    width: 100%;
+
+    padding: 0 24px 18px;
+
+    flex-shrink: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            var(--bg-main) 75%,
+            transparent
+        );
+}
+
+
+/* =========================================================
+   COMPOSER
+   ========================================================= */
+
+.composer {
+    width: 100%;
+
+    max-width: 850px;
+
+    min-height: 64px;
+
+    margin: 0 auto;
+
+    padding: 8px 10px 8px 14px;
+
+    border: 1px solid #30333a;
+
+    border-radius: 16px;
+
+    background: var(--input-bg);
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.25);
+
+    transition: 0.2s ease;
+}
+
+.composer:focus-within {
+    border-color: #454951;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ---------- Attach Button ---------- */
+
+.attach-btn {
+    width: 36px;
+    height: 36px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: #9a9da6;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+    transition: 0.15s ease;
+}
+
+.attach-btn:hover {
+    background: #292c32;
+
+    color: white;
+}
+
+
+/* ---------- Input ---------- */
+
+#message {
+    flex: 1;
+
+    width: 100%;
+
+    min-width: 0;
+
+    height: 44px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #eeeeef;
+
+    font-family: inherit;
+
+    font-size: 14px;
+}
+
+#message::placeholder {
+    color: #777b85;
+}
+
+
+/* ---------- Send Button ---------- */
+
+.send-btn {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #f0f0f1;
+
+    color: #111318;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+    transition: 0.15s ease;
+}
+
+.send-btn:hover {
+    background: white;
+
+    transform: translateY(-1px);
+}
+
+.send-btn:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================================================
+   COMPOSER NOTE
+   ========================================================= */
+
+.composer-note {
+    max-width: 850px;
+
+    margin: 10px auto 0;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    color: #5f626b;
+}
+
+
+/* =========================================================
+   CODE BLOCKS
+   ========================================================= */
+
+pre {
+    max-width: 100%;
+
+    margin: 14px 0;
+
+    padding: 16px;
+
+    background: #181a1f;
+
+    border: 1px solid #2b2e35;
+
+    border-radius: 10px;
+
+    overflow-x: auto;
+
+    font-family:
+        "Cascadia Code",
+        "Consolas",
+        "Courier New",
+        monospace;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+code {
+    font-family:
+        "Cascadia Code",
+        "Consolas",
+        "Courier New",
+        monospace;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        width: 240px;
+    }
+
+    .welcome {
+        margin-top: 50px;
+    }
+
+    .welcome h1 {
+        font-size: 25px;
+    }
+
+    .suggestions {
+        grid-template-columns: 1fr;
+    }
+
+    .message {
+        max-width: 95%;
+    }
+
+    .message.user .message-content {
+        max-width: 80%;
+    }
+
+    .composer-area {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .topbar {
+        padding: 0 14px;
+    }
+
+    .chat-window {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .welcome {
+        margin-top: 40px;
+    }
+
+    .welcome h1 {
+        font-size: 23px;
+    }
+
+    .welcome p {
+        font-size: 14px;
+    }
+
+    .suggestions {
+        width: 100%;
+    }
+}
+/* =========================================================
+   NOVA AI CODE BLOCK FIX
+   ========================================================= */
+
+.message-text .code-block {
+    width: 100%;
+    margin: 18px 0;
+
+    background: #17191e;
+
+    border: 1px solid #30333a;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.18);
+}
+
+
+/* Code header */
+
+.message-text .code-header {
+    height: 42px;
+
+    padding: 0 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #202329;
+
+    border-bottom: 1px solid #30333a;
+}
+
+
+/* Language name */
+
+.message-text .code-language {
+    color: #aeb2bb;
+
+    font-size: 13px;
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif;
+
+    text-transform: lowercase;
+}
+
+
+/* Copy button */
+
+.message-text .copy-code {
+    width: auto;
+    height: 30px;
+
+    padding: 0 9px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #aeb2bb;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: 0.15s ease;
+}
+
+
+.message-text .copy-code:hover {
+    background: #30333a;
+
+    color: #ffffff;
+}
+
+
+.message-text .copy-code.copied {
+    color: #ffffff;
+}
+
+
+/* Copy icon */
+
+.message-text .copy-icon {
+    font-size: 14px;
+
+    line-height: 1;
+}
+
+
+/* Actual code area */
+
+.message-text .code-block pre {
+    margin: 0;
+
+    padding: 17px 18px;
+
+    width: 100%;
+
+    background: #17191e;
+
+    border: none;
+
+    border-radius: 0;
+
+    overflow-x: auto;
+
+    color: #e6e7ea;
+
+    font-family:
+        "Cascadia Code",
+        "Consolas",
+        "Courier New",
+        monospace;
+
+    font-size: 13px;
+
+    line-height: 1.65;
+
+    white-space: pre;
+
+    tab-size: 4;
+}
+
+
+/* Code text */
+
+.message-text .code-block pre code {
+    display: block;
+
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+
+    color: #e6e7ea;
+
+    font-family:
+        "Cascadia Code",
+        "Consolas",
+        "Courier New",
+        monospace;
+
+    font-size: 13px;
+
+    line-height: 1.65;
+
+    white-space: pre;
+
+    border: none;
+}
+
+
+/* Code scrollbar */
+
+.message-text .code-block pre::-webkit-scrollbar {
+    height: 7px;
+}
+
+.message-text .code-block pre::-webkit-scrollbar-track {
+    background: #17191e;
+}
+
+.message-text .code-block pre::-webkit-scrollbar-thumb {
+    background: #383b43;
+
+    border-radius: 10px;
+}
+
+
+/* Inline code */
+
+.message-text .inline-code {
+    padding: 2px 6px;
+
+    border-radius: 5px;
+
+    background: #25282e;
+
+    color: #d8dae0;
+
+    font-family:
+        "Cascadia Code",
+        "Consolas",
+        monospace;
+
+    font-size: 0.9em;
+}
+
+
+/* Markdown headings */
+
+.message-text h2,
+.message-text h3,
+.message-text h4 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+    color: #f1f1f3;
+
+    line-height: 1.3;
+}
+
+.message-text h2 {
+    font-size: 22px;
+}
+
+.message-text h3 {
+    font-size: 18px;
+}
+
+.message-text h4 {
+    font-size: 15px;
+}
+
+
+/* Markdown lists */
+
+.message-text ul {
+    margin: 10px 0;
+
+    padding-left: 22px;
+}
+
+.message-text li {
+    margin: 5px 0;
+
+    color: #dfe0e3;
+}
+
+
+/* Bold */
+
+.message-text strong {
+    color: #ffffff;
+
+    font-weight: 600;
+}
+
+
+/* Mobile code blocks */
+
+@media (max-width: 600px) {
+
+    .message-text .code-block {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .message-text .code-block pre {
+        padding: 14px;
+
+        font-size: 12px;
+    }
+}
+
+/* =========================================================
+   NOVA AI — AURORA NIGHT
+   LIVE FLOWING BACKGROUND ONLY
+   ========================================================= */
+
+.main {
+    position: relative;
+}
+
+/* Large moving aurora ribbons */
+.main::before {
+    content: "";
+    position: absolute;
+
+    top: 68px;
+    left: -15%;
+    width: 130%;
+    height: 75%;
+
+    pointer-events: none;
+    z-index: 0;
+
+    background:
+        radial-gradient(
+            ellipse 34% 24% at 18% 42%,
+            rgba(0, 255, 210, 0.24),
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 38% 27% at 42% 25%,
+            rgba(40, 150, 255, 0.22),
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 34% 25% at 68% 45%,
+            rgba(145, 70, 255, 0.23),
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 32% 22% at 88% 25%,
+            rgba(0, 220, 255, 0.16),
+            transparent 72%
+        );
+
+    filter: blur(28px);
+
+    opacity: 0.9;
+
+    transform-origin: center;
+
+    animation: novaAuroraFlow 10s ease-in-out infinite alternate;
+}
+
+/* Soft secondary aurora layer */
+.main::after {
+    content: "";
+    position: absolute;
+
+    top: 18%;
+    left: -20%;
+    width: 140%;
+    height: 60%;
+
+    pointer-events: none;
+    z-index: 0;
+
+    background:
+        linear-gradient(
+            105deg,
+            transparent 8%,
+            rgba(0, 255, 210, 0.10) 25%,
+            rgba(40, 130, 255, 0.17) 39%,
+            rgba(150, 70, 255, 0.15) 53%,
+            rgba(0, 230, 210, 0.10) 67%,
+            transparent 86%
+        );
+
+    border-radius: 50%;
+
+    filter: blur(35px);
+
+    opacity: 0.85;
+
+    transform: rotate(-8deg);
+
+    animation: novaAuroraWaveLive 13s ease-in-out infinite alternate;
+}
+
+/* Keep all existing chatbot UI above the animation */
+.main > * {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes novaAuroraFlow {
+    0% {
+        transform:
+            translate3d(-7%, 3%, 0)
+            rotate(-4deg)
+            scale(1);
+    }
+
+    25% {
+        transform:
+            translate3d(2%, -4%, 0)
+            rotate(2deg)
+            scale(1.06);
+    }
+
+    50% {
+        transform:
+            translate3d(8%, 4%, 0)
+            rotate(5deg)
+            scale(1.12);
+    }
+
+    75% {
+        transform:
+            translate3d(-1%, 9%, 0)
+            rotate(-2deg)
+            scale(1.07);
+    }
+
+    100% {
+        transform:
+            translate3d(-8%, 1%, 0)
+            rotate(-5deg)
+            scale(1);
+    }
+}
+
+@keyframes novaAuroraWaveLive {
+    0% {
+        transform:
+            translate3d(-8%, 5%, 0)
+            rotate(-12deg)
+            scale(1);
+        opacity: 0.55;
+    }
+
+    30% {
+        transform:
+            translate3d(3%, -4%, 0)
+            rotate(-3deg)
+            scale(1.08);
+        opacity: 0.85;
+    }
+
+    60% {
+        transform:
+            translate3d(10%, 3%, 0)
+            rotate(7deg)
+            scale(1.14);
+        opacity: 0.72;
+    }
+
+    100% {
+        transform:
+            translate3d(-4%, 8%, 0)
+            rotate(-5deg)
+            scale(1.04);
+        opacity: 0.9;
+    }
+}
+
+/* =========================================================
+   NOVA AI — MESSAGE BOX
+   EXACT AURORA ANIMATED STYLE
+   ========================================================= */
+
+.composer {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background: rgba(17, 23, 35, 0.92);
+
+    border: 1px solid rgba(100, 180, 255, 0.35);
+
+    box-shadow:
+        0 0 18px rgba(0, 200, 255, 0.12),
+        0 0 35px rgba(120, 70, 255, 0.08);
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.25s ease;
+}
+
+/* Flowing aurora inside the message box */
+.composer::before {
+    content: "";
+    position: absolute;
+
+    left: -25%;
+    top: -80%;
+    width: 150%;
+    height: 260%;
+
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse 28% 45% at 18% 55%,
+            rgba(0, 255, 225, 0.75),
+            transparent 70%
+        ),
+        radial-gradient(
+            ellipse 32% 50% at 48% 42%,
+            rgba(0, 105, 255, 0.72),
+            transparent 70%
+        ),
+        radial-gradient(
+            ellipse 27% 45% at 72% 52%,
+            rgba(165, 55, 255, 0.78),
+            transparent 70%
+        ),
+        radial-gradient(
+            ellipse 25% 42% at 90% 35%,
+            rgba(0, 220, 255, 0.55),
+            transparent 70%
+        );
+
+    filter: blur(18px);
+
+    opacity: 0.42;
+
+    transform: translate3d(-8%, 0, 0) rotate(-4deg);
+
+    animation: novaMessageAurora 9s ease-in-out infinite alternate;
+}
+
+/* Soft glass layer */
+.composer::after {
+    content: "";
+
+    position: absolute;
+    inset: 1px;
+
+    z-index: -1;
+    pointer-events: none;
+
+    border-radius: 21px;
+
+    background:
+        linear-gradient(
+            105deg,
+            rgba(10, 30, 45, 0.74),
+            rgba(18, 25, 50, 0.58),
+            rgba(30, 15, 55, 0.66),
+            rgba(10, 35, 50, 0.72)
+        );
+
+    opacity: 0.82;
+
+    animation: novaMessageGlass 7s ease-in-out infinite alternate;
+}
+
+@keyframes novaMessageAurora {
+    0% {
+        transform:
+            translate3d(-10%, 4%, 0)
+            rotate(-6deg)
+            scale(1);
+    }
+
+    25% {
+        transform:
+            translate3d(0%, -3%, 0)
+            rotate(-1deg)
+            scale(1.06);
+    }
+
+    50% {
+        transform:
+            translate3d(9%, 3%, 0)
+            rotate(5deg)
+            scale(1.12);
+    }
+
+    75% {
+        transform:
+            translate3d(2%, -5%, 0)
+            rotate(1deg)
+            scale(1.07);
+    }
+
+    100% {
+        transform:
+            translate3d(-8%, 2%, 0)
+            rotate(-5deg)
+            scale(1.02);
+    }
+}
+
+@keyframes novaMessageGlass {
+    0% {
+        opacity: 0.72;
+    }
+
+    50% {
+        opacity: 0.88;
+    }
+
+    100% {
+        opacity: 0.76;
+    }
+}
+
+/* Keep controls above the animated layers */
+.composer > * {
+    position: relative;
+    z-index: 2;
+}
+
+.composer:focus-within {
+    border-color: rgba(80, 210, 255, 0.65);
+
+    box-shadow:
+        0 0 20px rgba(0, 210, 255, 0.18),
+        0 0 42px rgba(145, 65, 255, 0.14);
+
+    transform: translateY(-1px);
+}
+
+/* Aurora-style circular plus button */
+.attach-btn {
+    border-radius: 50%;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.attach-btn:hover {
+    transform: scale(1.07);
+
+    box-shadow:
+        0 0 12px rgba(0, 220, 255, 0.22);
+}
+
+/* Purple/blue glowing send button */
+.send-btn {
+    border-radius: 50%;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.send-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+
+    box-shadow:
+        0 0 16px rgba(100, 150, 255, 0.28);
+}
+
+.send-btn:active {
+    transform: scale(0.94);
+}
+
+/* =========================================================
+   REMOVE TOP-RIGHT HEADER ACTIONS
+   ========================================================= */
+
+.top-actions {
+    display: none !important;
+}
+
+/* =========================================================
+   CODE SYNTAX + NORMAL COPY BUTTON
+   ========================================================= */
+
+.message-text .code-block .copy-code {
+    width: auto !important;
+    height: 30px !important;
+    padding: 0 9px !important;
+    border: none !important;
+    border-radius: 6px !important;
+    background: transparent !important;
+    color: #aeb2bb !important;
+    font-family: inherit !important;
+    font-size: 12px !important;
+    cursor: pointer !important;
+}
+
+.message-text .code-block .copy-code:hover {
+    background: #30333a !important;
+    color: #ffffff !important;
+}
+
+.message-text .syntax-keyword {
+    color: #c792ea;
+}
+
+.message-text .syntax-string {
+    color: #c3e88d;
+}
+
+.message-text .syntax-comment {
+    color: #697586;
+    font-style: italic;
+}
+
+.message-text .syntax-number {
+    color: #f78c6c;
+}

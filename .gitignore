@@ -1,0 +1,8 @@
+Include/
+Lib/
+Scripts/
+.env
+chatbot.db
+pyvenv.cfg
+__pycache__/
+*.pyc

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nova AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+
+<body>
+
+    <div class="app">
+
+
+        <!-- =====================================================
+             SIDEBAR
+        ====================================================== -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-top">
+
+
+                <!-- BRAND -->
+
+                <div class="brand">
+
+                    <div class="brand-icon">
+                        🌀
+                    </div>
+
+                    <div>
+                        <h2>Nova AI</h2>
+                        <span>AI Assistant</span>
+                    </div>
+
+                </div>
+
+
+                <!-- NEW CHAT -->
+
+                <button class="new-chat">
+
+                    <span>＋</span>
+
+                    New chat
+
+                </button>
+
+
+                <!-- CHAT HISTORY -->
+
+                <div class="sidebar-section">
+
+                    <div class="section-title">
+                        Recent
+                    </div>
+
+
+                    <div class="chat-history active">
+
+                        <span>◌</span>
+
+                        <span class="history-text">
+                            New conversation
+                        </span>
+
+                    </div>
+
+
+                    <div class="chat-history">
+
+                        <span>◌</span>
+
+                        <span class="history-text">
+                            Python project ideas
+                        </span>
+
+                    </div>
+
+
+                    <div class="chat-history">
+
+                        <span>◌</span>
+
+                        <span class="history-text">
+                            AI chatbot development
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SIDEBAR BOTTOM -->
+
+            <div class="sidebar-bottom">
+
+
+
+
+                
+
+
+                <!-- USER PROFILE -->
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =====================================================
+             MAIN CHAT
+        ====================================================== -->
+
+        <section class="main">
+
+
+            <!-- =================================================
+                 TOP BAR
+            ================================================== -->
+
+            <header class="topbar">
+
+
+                <!-- MODEL SELECTOR -->
+
+                <div class="model-selector">
+
+
+                    <div class="model-icon">
+                        🌀
+                    </div>
+
+
+                    <div class="model-info">
+
+                        <strong>
+                            Nova AI
+                        </strong>
+
+                        <span>
+                            Fast & capable
+                        </span>
+
+                    </div>
+
+
+                    <span class="dropdown">
+                        ▾
+                    </span>
+
+                </div>
+
+
+                <!-- TOP ACTIONS -->
+
+                <div class="top-actions">
+
+                    <button
+                        title="Share"
+                        type="button">
+                        ↗
+                    </button>
+
+
+                    <button
+                        title="More"
+                        type="button">
+                        •••
+                    </button>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- =================================================
+                 CHAT WINDOW
+            ================================================== -->
+
+            <main
+                class="chat-window"
+                id="chat">
+
+
+                <!-- WELCOME SCREEN -->
+
+                <div class="welcome">
+
+
+                    <div class="welcome-icon">
+                        🌀
+                    </div>
+
+
+                    <h1>
+                        How can I help you?
+                    </h1>
+
+
+                    <p>
+                        Ask me anything, write code, brainstorm ideas,
+                        or learn something new.
+                    </p>
+
+
+                    <!-- SUGGESTIONS -->
+
+                    <div class="suggestions">
+
+
+                        <button type="button">
+
+                            <span>
+                                ⌨
+                            </span>
+
+                            Help me write code
+
+                        </button>
+
+
+                        <button type="button">
+
+                            <span>
+                                ✧
+                            </span>
+
+                            Explain something
+
+                        </button>
+
+
+                        <button type="button">
+
+                            <span>
+                                ⚡
+                            </span>
+
+                            Brainstorm ideas
+
+                        </button>
+
+
+                        <button type="button">
+
+                            <span>
+                                ◈
+                            </span>
+
+                            Analyze a problem
+
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+
+                <!--
+                    IMPORTANT:
+                    There is NO initial AI message here.
+
+                    chat.js will create AI messages dynamically
+                    when the user sends a message.
+                -->
+
+
+            </main>
+
+
+
+            <!-- =================================================
+                 MESSAGE COMPOSER
+            ================================================== -->
+
+            <footer class="composer-area">
+
+
+                <div class="composer">
+
+
+                    <!-- ATTACH BUTTON -->
+
+                    <button
+                        class="attach-btn"
+                        type="button"
+                        title="Attach file">
+
+                        ＋
+
+                    </button>
+
+
+                    <!-- MESSAGE INPUT -->
+
+                    <input
+                        type="text"
+                        id="message"
+                        placeholder="Message Nova AI..."
+                        autocomplete="off"
+                    >
+
+
+                    <!-- SEND BUTTON -->
+
+                    <button
+                        id="send-btn"
+                        class="send-btn"
+                        type="button"
+                        title="Send message">
+
+                        ↑
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- DISCLAIMER -->
+
+                <div class="composer-note">
+
+                    Nova AI can make mistakes.
+                    Check important information.
+
+                </div>
+
+            </footer>
+
+
+        </section>
+
+
+    </div>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+
+</body>
+
+</html>
