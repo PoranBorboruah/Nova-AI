@@ -8,9 +8,11 @@ from flask import (
     session
 )
 
-import sqlite3
 import os
 import json
+
+import psycopg
+from psycopg.rows import dict_row
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -23,13 +25,26 @@ from openai import OpenAI
 # Get the folder where app.py is located
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+
+# ---------------------------------------------------------
+# LOAD ENVIRONMENT VARIABLES
+# ---------------------------------------------------------
+
 # Load .env from inside .venv
 ENV_FILE = os.path.join(BASE_DIR, ".env")
+
+# Load .env.local for Vercel/local development variables
+ENV_LOCAL_FILE = os.path.join(BASE_DIR, ".env.local")
+
 load_dotenv(ENV_FILE)
+load_dotenv(ENV_LOCAL_FILE, override=True)
 
 
-# SQLite database
-DATABASE = os.path.join(BASE_DIR, "chatbot.db")
+# ---------------------------------------------------------
+# NEON POSTGRESQL DATABASE
+# ---------------------------------------------------------
+
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 
 # =========================================================
@@ -37,6 +52,7 @@ DATABASE = os.path.join(BASE_DIR, "chatbot.db")
 # =========================================================
 
 app = Flask(__name__)
+
 
 # Used for Flask sessions
 app.secret_key = os.getenv(
@@ -61,12 +77,15 @@ client = OpenAI(
 
 def get_db():
 
-    connection = sqlite3.connect(DATABASE)
+    if not DATABASE_URL:
+        raise RuntimeError(
+            "DATABASE_URL is not configured."
+        )
 
-    # Allows us to access columns by name
-    connection.row_factory = sqlite3.Row
-
-    return connection
+    return psycopg.connect(
+        DATABASE_URL,
+        row_factory=dict_row
+    )
 
 
 # =========================================================
@@ -87,7 +106,7 @@ def init_db():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS chats (
 
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
 
             title TEXT NOT NULL,
 
@@ -106,7 +125,7 @@ def init_db():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS messages (
 
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
 
             chat_id INTEGER NOT NULL,
 
@@ -126,7 +145,12 @@ def init_db():
 
     connection.commit()
 
+    cursor.close()
     connection.close()
+
+
+# Initialize database when application starts
+init_db()
 
 
 # =========================================================
@@ -142,14 +166,19 @@ def create_chat(title="New conversation"):
 
     cursor.execute("""
         INSERT INTO chats (title)
-        VALUES (?)
+
+        VALUES (%s)
+
+        RETURNING id
     """, (title,))
 
 
-    chat_id = cursor.lastrowid
+    chat_id = cursor.fetchone()["id"]
+
 
     connection.commit()
 
+    cursor.close()
     connection.close()
 
 
@@ -171,7 +200,7 @@ def save_message(chat_id, role, content):
         INSERT INTO messages
         (chat_id, role, content)
 
-        VALUES (?, ?, ?)
+        VALUES (%s, %s, %s)
     """, (
         chat_id,
         role,
@@ -185,12 +214,13 @@ def save_message(chat_id, role, content):
 
         SET updated_at = CURRENT_TIMESTAMP
 
-        WHERE id = ?
+        WHERE id = %s
     """, (chat_id,))
 
 
     connection.commit()
 
+    cursor.close()
     connection.close()
 
 
@@ -208,10 +238,10 @@ def update_chat_title(chat_id, title):
     cursor.execute("""
         UPDATE chats
 
-        SET title = ?,
+        SET title = %s,
             updated_at = CURRENT_TIMESTAMP
 
-        WHERE id = ?
+        WHERE id = %s
     """, (
         title,
         chat_id
@@ -220,6 +250,7 @@ def update_chat_title(chat_id, title):
 
     connection.commit()
 
+    cursor.close()
     connection.close()
 
 
@@ -283,6 +314,7 @@ def get_chats():
 
     chats = cursor.fetchall()
 
+    cursor.close()
     connection.close()
 
 
@@ -314,7 +346,10 @@ def get_chat(chat_id):
     cursor = connection.cursor()
 
 
-    # Get chat
+    # -----------------------------------------------------
+    # GET CHAT
+    # -----------------------------------------------------
+
     cursor.execute("""
         SELECT
             id,
@@ -324,7 +359,7 @@ def get_chat(chat_id):
 
         FROM chats
 
-        WHERE id = ?
+        WHERE id = %s
     """, (chat_id,))
 
 
@@ -333,6 +368,7 @@ def get_chat(chat_id):
 
     if chat is None:
 
+        cursor.close()
         connection.close()
 
         return jsonify({
@@ -340,7 +376,10 @@ def get_chat(chat_id):
         }), 404
 
 
-    # Get messages
+    # -----------------------------------------------------
+    # GET MESSAGES
+    # -----------------------------------------------------
+
     cursor.execute("""
         SELECT
             id,
@@ -350,7 +389,7 @@ def get_chat(chat_id):
 
         FROM messages
 
-        WHERE chat_id = ?
+        WHERE chat_id = %s
 
         ORDER BY id ASC
     """, (chat_id,))
@@ -358,6 +397,8 @@ def get_chat(chat_id):
 
     messages = cursor.fetchall()
 
+
+    cursor.close()
     connection.close()
 
 
@@ -405,24 +446,31 @@ def delete_chat(chat_id):
     cursor = connection.cursor()
 
 
-    # Delete messages first
+    # -----------------------------------------------------
+    # DELETE MESSAGES
+    # -----------------------------------------------------
+
     cursor.execute("""
         DELETE FROM messages
 
-        WHERE chat_id = ?
+        WHERE chat_id = %s
     """, (chat_id,))
 
 
-    # Delete chat
+    # -----------------------------------------------------
+    # DELETE CHAT
+    # -----------------------------------------------------
+
     cursor.execute("""
         DELETE FROM chats
 
-        WHERE id = ?
+        WHERE id = %s
     """, (chat_id,))
 
 
     connection.commit()
 
+    cursor.close()
     connection.close()
 
 
@@ -452,7 +500,10 @@ def chat():
     ).strip()
 
 
-    # Empty message
+    # -----------------------------------------------------
+    # EMPTY MESSAGE
+    # -----------------------------------------------------
+
     if not message:
 
         return jsonify({
@@ -507,17 +558,21 @@ def chat():
 
         FROM chats
 
-        WHERE id = ?
+        WHERE id = %s
     """, (chat_id,))
 
 
     chat = cursor.fetchone()
 
 
+    cursor.close()
     connection.close()
 
 
-    # Create title from first message
+    # -----------------------------------------------------
+    # CREATE TITLE FROM FIRST MESSAGE
+    # -----------------------------------------------------
+
     if chat and chat["title"] == "New conversation":
 
         title = message.strip()
@@ -635,9 +690,9 @@ def chat():
             yield "data: [DONE]\n\n"
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # RETURN STREAM
-    # -----------------------------------------------------
+    # =====================================================
 
     return Response(
 
@@ -660,17 +715,27 @@ def chat():
 
 if __name__ == "__main__":
 
-    # Create database/tables
-    init_db()
-
-
     print("")
     print("====================================")
     print("        NOVA AI CHATBOT")
     print("====================================")
     print("")
-    print("Database:", DATABASE)
-    print("Gemini API:", "Connected" if os.getenv("GEMINI_API_KEY") else "Missing")
+
+
+    print(
+        "Database:",
+        "Neon PostgreSQL" if DATABASE_URL else "Missing"
+    )
+
+
+    print(
+        "Gemini API:",
+        "Connected"
+        if os.getenv("GEMINI_API_KEY")
+        else "Missing"
+    )
+
+
     print("")
     print("Starting Flask server...")
     print("")

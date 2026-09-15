@@ -6,3 +6,5 @@ chatbot.db
 pyvenv.cfg
 __pycache__/
 *.pyc
+.vercel
+.env*
